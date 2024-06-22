@@ -8,19 +8,19 @@ private  val logger = KotlinLogging.logger {}
 
 class Server {
     fun run(port: Int) {
-        logger.info { "Starting server on port $port" };
-        return listen(ServerSocket(port));
+        logger.info { "Starting server on port $port" }
+        return listen(ServerSocket(port))
     }
 
     private fun listen(server:ServerSocket){
         logger.info { "Listening on port ${server.localPort}" }
 
         while(true){
-            val client = server.accept();
+            val client = server.accept()
             logger.info { "Client connected: ${client.inetAddress.hostAddress}" }
 
-            val reader = client.getInputStream().bufferedReader();
-            val writer = client.getOutputStream().bufferedWriter();
+            val reader = client.getInputStream().bufferedReader()
+            val writer = client.getOutputStream().bufferedWriter()
 
             var line: String?
 
@@ -34,7 +34,7 @@ class Server {
                             writer.flush()
                         }
                         if (line == null) {
-                            break;
+                            break
                         }
                     }
                 } catch (e: Exception) {
