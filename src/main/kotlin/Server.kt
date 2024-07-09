@@ -1,10 +1,9 @@
 package org.jararaca
 
-import  mu.KotlinLogging
-import java.io.BufferedReader
+import mu.KotlinLogging
 import java.net.ServerSocket
 
-private  val logger = KotlinLogging.logger {}
+private val logger = KotlinLogging.logger {}
 
 class Server {
     fun run(port: Int) {
@@ -12,10 +11,10 @@ class Server {
         return listen(ServerSocket(port))
     }
 
-    private fun listen(server:ServerSocket){
+    private fun listen(server: ServerSocket) {
         logger.info { "Listening on port ${server.localPort}" }
 
-        while(true){
+        while (true) {
             val client = server.accept()
             logger.info { "Client connected: ${client.inetAddress.hostAddress}" }
 
@@ -27,7 +26,7 @@ class Server {
             Thread {
                 try {
                     while (client.isConnected) {
-                        line = reader.readLine();
+                        line = reader.readLine()
                         reader.lineSequence().forEach {
                             logger.info { "Received: $it" }
                             writer.write("Echo: $it\n")
